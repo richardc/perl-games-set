@@ -2,7 +2,7 @@ use strict;
 package Games::Set;
 use Games::Set::Card;
 use List::Util qw( max );
-use base 'Class::Acessor::Fast';
+use base 'Class::Accessor::Fast';
 __PACKAGE__->mk_accessors(qw( deck ));
 our $VERSION = 0.01;
 
@@ -89,11 +89,12 @@ returns true if the cards make a set
 =cut
 
 sub set {
+    my $self = shift;
     for my $property ( keys %Games::Set::Card::properties ) {
         my %seen;
         $seen{ $_->$property() }++ for @_;
-        next if keys %seen == 1;       # all same
-        next if max values %seen == 1; # all different
+        next if (keys %seen)       == 1; # all same
+        next if (max values %seen) == 1; # all different
         return;
     }
     return 1;
