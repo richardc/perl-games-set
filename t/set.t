@@ -7,7 +7,7 @@ my $game = Games::Set->new;
 
 isa_ok( $game, 'Games::Set' );
 
-my ($card) = $game->random_deck( 1 );
+my $card = Games::Set::Card->new;
 isa_ok( $card, 'Games::Set::Card' );
 
 ok( $game->deck([ $card ]) );

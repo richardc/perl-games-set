@@ -8,18 +8,34 @@ our %properties = ( count   => [ qw( one      two       three   ) ],
                    );
 __PACKAGE__->mk_accessors( keys %properties );
 
-=head2 random
-
-construct a new card at random
-
-=cut
-
-sub random {
-    my $class = shift;
-    $class->new({ map {
-        $_ => $properties{$_}[ rand @{ $properties{$_} } ]
-    } keys %properties });
-}
-
 1;
 __END__
+
+=head1 NAME
+
+Games::Set::Card - representation of a Set card
+
+=head1 SYNOPSIS
+
+ my $card = Games::Set::Card->new;
+
+=head1 DESCRIPTION
+
+This is a utility class for Games::Set.
+
+=head1 AUTHOR
+
+Richard Clamp <richardc@unixbeard.net>
+
+=head1 COPYRIGHT
+
+Copyright (C) 2003 Richard Clamp.  All Rights Reserved.
+
+This module is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+
+=head1 SEE ALSO
+
+Games::Set
+
+=cut

@@ -4,9 +4,12 @@ use Games::Set::Card;
 use Algorithm::ChooseSubsets;
 use Algorithm::GenerateSequence;
 use List::Util qw( max );
+use Class::Accessor::Fast;
 use base 'Class::Accessor::Fast';
 __PACKAGE__->mk_accessors(qw( deck ));
-our $VERSION = 0.01;
+
+use vars qw( $VERSION );
+$VERSION = '0.01';
 
 =head1 NAME
 
@@ -21,19 +24,23 @@ Games::Set - The rules for the game of Set
 
 =head1 DESCRIPTION
 
+Games::Set understands some of the rules of the card game Set.  It
+also knows how to generate a standard deck.
+
 =head1 METHODS
 
 =head2 new
 
-Class::Accessor inherited constructor
+Class::Accessor inherited constructor, returns a new gamestate
 
 =head2 deck
 
-The current deck
+The current deck.  A reference to an array containing many
+Games::Set::Card objects.
 
 =head2 shuffle
 
-Shuffle the current deck
+Shuffle the current deck.
 
 =cut
 
@@ -52,7 +59,7 @@ sub shuffle {
 
 =head2 deal
 
-Take a card from the top of the current deck
+Take a card from the top of the deck.
 
 =cut
 
@@ -63,7 +70,7 @@ sub deal {
 
 =head2 standard_deck
 
-calculates the standard deck as a list of Games::Set::Card objects
+Calculates the standard deck as a list of Games::Set::Card objects.
 
 =cut
 
@@ -78,21 +85,10 @@ sub standard_deck {
       } $iter->as_list;
 }
 
-=head2 random_deck( $n )
-
-create a random deck of $n cards, as a list of Games::Set::Card objects
-
-=cut
-
-sub random_deck {
-    my $self  = shift;
-    my $count = shift;
-    map { Games::Set::Card->random } 1..$count;
-}
 
 =head2 set( @cards )
 
-returns true if the cards make a set
+Returns true if the cards make a set.
 
 =cut
 
@@ -110,7 +106,7 @@ sub set {
 
 =head2 find_sets( @cards )
 
-return all the possible sets within @cards as array references
+returns all the possible sets within @cards as array references
 
 =cut
 
@@ -129,3 +125,23 @@ sub find_sets {
 1;
 __END__
 
+=head1 BUGS
+
+None currently known.  If you find any please make use of
+L<http://rt.cpan.org> by mailing your report to
+bug-Games-Set@rt.cpan.org, or contact me directly.
+
+=head1 AUTHOR
+
+Richard Clamp <richardc@unixbeard.net>
+
+Rules of Set by Set Enterprises.  http://setgame.com/
+
+=head1 COPYRIGHT
+
+Copyright (C) 2003 Richard Clamp.  All Rights Reserved.
+
+This module is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+
+=cut
