@@ -1,6 +1,6 @@
 #!perl -w
 use strict;
-use Test::More tests => 12;
+use Test::More tests => 14;
 
 require_ok( 'Games::Set' );
 my $game = Games::Set->new;
@@ -31,5 +31,10 @@ ok( !$game->set( @set ), "now not a set" );
 ok( $set[1]->colour("purple") );
 ok( $game->set( @set ), "and now a set again" );
 
-use YAML;
-print Dump $game->standard_deck;
+# these numbers from http://set.omino.com/
+my @cards = $game->standard_deck;
+is( @cards, 81, "81 cards in a deck" );
+
+my @sets  = $game->find_sets( @cards );
+is( @sets, 1080, "1080 sets in a deck" )
+
