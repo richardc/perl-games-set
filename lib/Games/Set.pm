@@ -1,6 +1,7 @@
 use strict;
 package Games::Set;
 use Games::Set::Card;
+use Algorithm::ChooseSubsets ();
 use List::Util qw( max );
 use base 'Class::Accessor::Fast';
 __PACKAGE__->mk_accessors(qw( deck ));
@@ -66,8 +67,8 @@ The standard deck, as a list of Games::Set::Card objects
 =cut
 
 sub standard_deck {
-    # XXX buy a deck. Possibly it's just permuatations.  Also check on
-    # if we're allowed to disclose it
+    my $self = shift;
+
 }
 
 =head2 random_deck( $n )
@@ -100,12 +101,22 @@ sub set {
     return 1;
 }
 
-
 =head2 find_sets( @cards )
 
-find and return the sets within @cards
+return all the possible sets within @cards as array references
 
 =cut
+
+sub find_sets {
+    my $self = shift;
+
+    my @found;
+    my $iter = Algorithm::ChooseSubsets->new( \@_, 3 );
+    while (my $set = $iter->next) {
+        push @found, $set if $self->set(@$set);
+    }
+    return @found;
+}
 
 
 1;
