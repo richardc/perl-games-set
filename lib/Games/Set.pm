@@ -14,7 +14,7 @@ Games::Set - The rules for the game of Set
 
 =head1 SYNOPSIS
 
-  my $game = Games::Set->new({ deck => [ Games::Set->random_deck( 25 ) ] });
+  my $game = Games::Set->new({ deck => [ Games::Set->standard_deck ] });
   $game->shuffle;
   my @cards = map { $game->deal } 1..3; # give me 3 cards
   print $game->set( @cards ) ? "set\n" : "no set\n";
