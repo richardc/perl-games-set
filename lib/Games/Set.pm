@@ -144,4 +144,11 @@ Copyright (C) 2003 Richard Clamp.  All Rights Reserved.
 This module is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
+=head1 SEE ALSO
+
+L<http://setgame.com|The Set Game Company>, purveyors of Set
+
+L<http://set.omino.com> David Van Brink's site detailling some of the
+maths involved
+
 =cut
