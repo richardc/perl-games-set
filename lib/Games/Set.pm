@@ -1,7 +1,8 @@
 use strict;
 package Games::Set;
 use Games::Set::Card;
-use Algorithm::ChooseSubsets ();
+use Algorithm::ChooseSubsets;
+use Algorithm::GenerateSequence;
 use List::Util qw( max );
 use base 'Class::Accessor::Fast';
 __PACKAGE__->mk_accessors(qw( deck ));
@@ -62,13 +63,19 @@ sub deal {
 
 =head2 standard_deck
 
-The standard deck, as a list of Games::Set::Card objects
+calculates the standard deck as a list of Games::Set::Card objects
 
 =cut
 
 sub standard_deck {
     my $self = shift;
-
+    my $iter = Algorithm::GenerateSequence->new(
+        values %Games::Set::Card::properties
+       );
+    map {
+        my %h; @h{ keys %Games::Set::Card::properties } = @$_;
+        Games::Set::Card->new(\%h)
+      } $iter->as_list;
 }
 
 =head2 random_deck( $n )

@@ -31,3 +31,5 @@ ok( !$game->set( @set ), "now not a set" );
 ok( $set[1]->colour("purple") );
 ok( $game->set( @set ), "and now a set again" );
 
+use YAML;
+print Dump $game->standard_deck;
