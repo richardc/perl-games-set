@@ -1,0 +1,19 @@
+use YAML;
+use Games::Set;
+use Algorithm::ChooseSubsets;
+package Games::Set;
+use Memoize;
+memoize('set');
+package main;
+
+my $game = Games::Set->new;
+my @deck = Games::Set->standard_deck;
+my $iter = Algorithm::ChooseSubsets->new(\@deck, 9);
+my %count;
+my $i;
+while (my $hand = $iter->next) {
+    print STDERR "\rhands: ", ++$i;
+    my @sets = $game->find_sets( @$hand );
+    $count{ scalar @sets }++;
+}
+print Dump \%count;
